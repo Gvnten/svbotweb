@@ -1,0 +1,33 @@
+import 'package:bot_web/Views/ChatView/ChatBody.dart';
+import 'package:bot_web/Views/ChatView/ChatHeader.dart';
+import 'package:bot_web/Views/ChatView/GetUserText.dart';
+import 'package:flutter/material.dart';
+
+class Chat extends StatefulWidget {
+  @override
+  _ChatState createState() => _ChatState();
+}
+
+class _ChatState extends State<Chat> {
+  String name;
+  @override
+  Widget build(BuildContext context) {
+    return new Column(
+      children: [
+        ChatHeader(
+          name: name,
+        ),
+        ChatBody(
+          onchanged: control,
+        ),
+        GetuserText(),
+      ],
+    );
+  }
+
+  control(String name) {
+    setState(() {
+      this.name = name;
+    });
+  }
+}
