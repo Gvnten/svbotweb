@@ -1,7 +1,6 @@
 import 'package:bot_web/redux/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ChatHeader extends StatelessWidget {
   @override
@@ -17,13 +16,18 @@ class ChatHeader extends StatelessWidget {
             topLeft: Radius.circular(17.0),
             topRight: Radius.circular(17.0),
           ),
-          color: Colors.pink,
+          color: Color(0xff1278bd),
         ),
-        child: new Row(
+        child: new Wrap(
           children: [
-            Text(
-              "Сайн байна уу ${state.userName}. Танд бот хариулж байна.",
-              style: GoogleFonts.sourceSansPro(color: Colors.white),
+            new FittedBox(
+              child: Text(
+                "Сайн байна уу ${state.userName}. Танд бот хариулж байна.",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'RobotoMono',
+                ),
+              ),
             ),
           ],
         ),

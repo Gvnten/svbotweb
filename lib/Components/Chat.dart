@@ -6,12 +6,19 @@ import 'package:flutter/material.dart';
 class Chat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Column(
-      children: [
-        ChatHeader(),
-        ChatBody(),
-        GetuserText(),
-      ],
+    return new Container(
+      margin: EdgeInsets.only(right: 70),
+      height: 500,
+      width: 500,
+      alignment: Alignment.center,
+      child: new Flex(
+        direction: Axis.vertical,
+        children: [
+          ChatHeader(),
+          ChatBody(),
+          GetuserText(),
+        ],
+      ),
     );
   }
 }
