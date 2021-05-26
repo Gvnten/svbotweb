@@ -16,16 +16,16 @@ final List<Map<String, dynamic>> aql = [];
 ThunkAction<AppState> getConversation() {
   return (Store<AppState> store) async {
     try {
-      final response = await http.get(
-        Uri.parse('https://api.chucknorris.io/jokes/random'),
-      );
-      final responseBody = json.decode(response.body);
+      // final response = await http.get(
+      //   Uri.parse('https://api.chucknorris.io/jokes/random'),
+      // );
+      //final responseBody = json.decode(response.body);
       // store.dispatch(
       //   GetJoke(
       //     joke: responseBody['value'],
       //   ),
       // );
-      print(responseBody['value']);
+      //print(responseBody['value']);
     } catch (e) {
       store.dispatch(
         ErrorMsg(
