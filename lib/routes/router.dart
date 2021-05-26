@@ -9,12 +9,12 @@ class RouteGenerator {
     switch (settings.name) {
       case RouteNames.HomeRoute:
         return _GeneratePageRoute(
-          widget: HomePage(),
+          widget: new HomePage(),
           routeName: settings.name,
         );
       default:
         return _GeneratePageRoute(
-          widget: HomePage(),
+          widget: new HomePage(),
           routeName: settings.name,
         );
     }

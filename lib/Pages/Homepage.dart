@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
                       },
                       onHover: (value) {
                         StoreProvider.of<AppState>(context).dispatch(
-                          ChangeHoverTextColor(
+                          new ChangeHoverTextColor(
                             onHoverValuesList: NavbarItemList.changeHoverColor(
                               0,
                               value,
@@ -50,7 +50,7 @@ class HomePage extends StatelessWidget {
                           ),
                         );
                       },
-                      child: Padding(
+                      child: new Padding(
                         padding: const EdgeInsets.all(7.0),
                         child: Text(
                           'Нүүр',
@@ -63,12 +63,12 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      borderRadius: BorderRadius.circular(11.0),
+                      borderRadius: new BorderRadius.circular(11.0),
                     ),
-                    SizedBox(
+                    new SizedBox(
                       width: MediaQuery.of(context).size.width / 20,
                     ),
-                    InkWell(
+                    new InkWell(
                       focusNode: NavbarItemList.introFocus,
                       focusColor: Color(0xff1278bd),
                       hoverColor: Color(0xff1278bd),
@@ -96,7 +96,7 @@ class HomePage extends StatelessWidget {
                           ),
                         );
                       },
-                      child: Padding(
+                      child: new Padding(
                         padding: const EdgeInsets.all(7.0),
                         child: Text(
                           'Танилцуулга',
@@ -111,17 +111,17 @@ class HomePage extends StatelessWidget {
                       ),
                       borderRadius: BorderRadius.circular(11.0),
                     ),
-                    SizedBox(
+                    new SizedBox(
                       width: MediaQuery.of(context).size.width / 20,
                     ),
-                    InkWell(
+                    new InkWell(
                       focusNode: NavbarItemList.aboutFocus,
                       hoverColor: Color(0xff1278bd),
                       focusColor: Color(0xff1278bd),
                       onTap: () {
                         StoreProvider.of<AppState>(context).dispatch(
-                          ChangeContentAction(
-                            page: AboutContent(),
+                          new ChangeContentAction(
+                            page: new AboutContent(),
                             changeFocusValues: NavbarItemList.changeFocus(2),
                           ),
                         );
@@ -134,7 +134,7 @@ class HomePage extends StatelessWidget {
                       },
                       onHover: (value) {
                         StoreProvider.of<AppState>(context).dispatch(
-                          ChangeHoverTextColor(
+                          new ChangeHoverTextColor(
                             onHoverValuesList: NavbarItemList.changeHoverColor(
                               2,
                               value,
@@ -142,9 +142,9 @@ class HomePage extends StatelessWidget {
                           ),
                         );
                       },
-                      child: Padding(
+                      child: new Padding(
                         padding: const EdgeInsets.all(7),
-                        child: Text(
+                        child: new Text(
                           'Бидний тухай',
                           style: TextStyle(
                             color: state.onHoverValuesList[2] == true
@@ -157,7 +157,7 @@ class HomePage extends StatelessWidget {
                       ),
                       borderRadius: BorderRadius.circular(11.0),
                     ),
-                    SizedBox(
+                    new SizedBox(
                       width: MediaQuery.of(context).size.width / 20,
                     ),
                   ],
