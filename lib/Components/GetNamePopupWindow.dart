@@ -9,18 +9,22 @@ class GetNamePopupwindow extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, AppState>(
       converter: (store) => store.state,
-      builder: (context, state) => new PopupWindowWidget(
-        intelligentConversion: true,
-        child: Container(
-          color: Color(0xff1278bd),
-          padding: EdgeInsets.all(15.0),
-          margin: EdgeInsets.only(top: 10),
-          child: Text(
-            'Chat',
-            style: TextStyle(color: Colors.white, fontSize: 14.0),
+      builder: (context, state) => SafeArea(
+        child: new PopupWindowWidget(
+          intelligentConversion: true,
+          child: Container(
+            color: Color(0xff1278bd),
+            padding: EdgeInsets.all(15.0),
+            child: Text(
+              'Чат',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14.0,
+              ),
+            ),
           ),
+          showChild: new GetUserName(),
         ),
-        showChild: new GetUserName(),
       ),
     );
   }

@@ -12,12 +12,11 @@ class ChatPopupwindow extends StatelessWidget {
       builder: (context, state) => new PopupWindowWidget(
         intelligentConversion: true,
         child: Container(
+          padding: EdgeInsets.all(15.0),
           decoration: new BoxDecoration(
             color: Color(0xff1278bd),
             shape: BoxShape.circle,
           ),
-          padding: EdgeInsets.all(15.0),
-          margin: EdgeInsets.only(top: 10),
           child: new Icon(
             Icons.messenger,
             color: Colors.white,

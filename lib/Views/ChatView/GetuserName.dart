@@ -5,9 +5,6 @@ import 'package:bot_web/middleware/sharedPreferences.dart';
 import 'package:bot_web/redux/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_chat_bubble/bubble_type.dart';
-import 'package:flutter_chat_bubble/chat_bubble.dart';
-import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_7.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 class GetUserName extends StatelessWidget {
@@ -20,80 +17,148 @@ class GetUserName extends StatelessWidget {
       builder: (context, state) => new Container(
         margin: const EdgeInsets.only(right: 80),
         child: new Container(
-          width: 250,
-          height: 130,
-          child: new ChatBubble(
-            backGroundColor: Color(0xff1278bd),
-            child: new Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                new Text(
-                  "Нэрээ оруулна уу!",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'RobotoMono',
+          width: 400,
+          height: 210,
+          child: new Column(
+            children: [
+              new Container(
+                padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                width: 400,
+                height: 50,
+                alignment: Alignment.center,
+                decoration: new BoxDecoration(
+                  borderRadius: new BorderRadius.only(
+                    topLeft: Radius.circular(17.0),
+                    topRight: Radius.circular(17.0),
                   ),
+                  color: Color(0xff1278bd),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 0),
-                  child: new TextFormField(
-                    decoration: InputDecoration(
-                      counterStyle: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                    maxLength: 15,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(
-                        RegExp(r'[a-zA-Z]'), //r'^\d+(?:\.\d+)?$'
-                      ),
-                    ],
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 17,
-                    ),
-                    onChanged: (name) {
-                      StoreProvider.of<AppState>(context).dispatch(
-                        SetUserName(
-                          userName: _getUserNameController.text,
+                child: new Wrap(
+                  children: [
+                    new FittedBox(
+                      child: Text(
+                        "Хэрэглэгч та нэрээ оруулна уу!",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'RobotoMono',
                         ),
-                      );
-                    },
-                    cursorColor: Colors.white,
-                    autofocus: true,
-                    controller: _getUserNameController,
-                  ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
                 ),
-                Visibility(
-                  visible: _getUserNameController.text == null ||
-                          _getUserNameController.text.isEmpty
-                      ? false
-                      : true,
-                  child: new InkWell(
-                    child: Text(
-                      "Хадгалах",
+              ),
+              new Container(
+                padding: EdgeInsets.fromLTRB(30, 25, 30, 25),
+                width: 400,
+                height: 160,
+                decoration: new BoxDecoration(
+                  border: new Border.all(
+                    color: Color(0xff1278bd),
+                    width: 1.0,
+                  ),
+                  borderRadius: new BorderRadius.only(
+                    bottomLeft: Radius.circular(17.0),
+                    bottomRight: Radius.circular(17.0),
+                  ),
+                  color: Colors.white,
+                ),
+                child: new Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    new TextField(
+                      cursorColor: Colors.white,
+                      autofocus: true,
+                      controller: _getUserNameController,
+                      maxLines: 1,
+                      maxLength: 15,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        fillColor: Color(0xff1278bd),
+                        filled: true,
+                        hintText: "   Энд бичнэ үү",
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'RobotoMono',
+                        ),
+                        hintStyle: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'RobotoMono',
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4.0),
+                          borderSide: BorderSide(
+                            color: Colors.blue,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4.0),
+                          borderSide: BorderSide(
+                            color: Colors.blue,
+                          ),
+                        ),
+                        counterStyle: TextStyle(
+                          color: Color(0xff1278bd),
+                        ),
+                      ),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                          RegExp(r'[a-zA-Z]'), //r'^\d+(?:\.\d+)?$'
+                        ),
+                      ],
                       style: TextStyle(
                         color: Colors.white,
-                        fontFamily: 'RobotoMono',
+                        fontSize: 17,
+                      ),
+                      onChanged: (name) {
+                        StoreProvider.of<AppState>(context).dispatch(
+                          SetUserName(
+                            userName: _getUserNameController.text,
+                          ),
+                        );
+                      },
+                    ),
+                    new Visibility(
+                      visible: _getUserNameController.text == null ||
+                              _getUserNameController.text.isEmpty
+                          ? false
+                          : true,
+                      child: Container(
+                        decoration: new BoxDecoration(
+                          borderRadius: new BorderRadius.all(
+                            Radius.circular(4.0),
+                          ),
+                          color: Color(0xff1278bd),
+                        ),
+                        child: new InkWell(
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: 88,
+                            height: 34,
+                            child: Text(
+                              "Хадгалах",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'RobotoMono',
+                              ),
+                            ),
+                          ),
+                          onTap: () async {
+                            SharedPref.setName(_getUserNameController.text);
+                            StoreProvider.of<AppState>(context).dispatch(
+                              ChangePopupWindow(
+                                popupWindow: new ChatPopupwindow(),
+                              ),
+                            );
+                            Navigator.pop(context);
+                          },
+                        ),
                       ),
                     ),
-                    onTap: () async {
-                      SharedPref.setName(_getUserNameController.text);
-                      StoreProvider.of<AppState>(context).dispatch(
-                        ChangePopupWindow(
-                          popupWindow: new ChatPopupwindow(),
-                        ),
-                      );
-                      Navigator.pop(context);
-                    },
-                  ),
+                  ],
                 ),
-              ],
-            ),
-            elevation: 0,
-            clipper: new ChatBubbleClipper7(type: BubbleType.sendBubble),
+              ),
+            ],
           ),
         ),
       ),

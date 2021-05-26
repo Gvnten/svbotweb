@@ -1,13 +1,16 @@
-import 'package:bot_web/middleware/middleware.dart';
+import 'package:bot_web/actions/Question.dart';
+import 'package:bot_web/actions/thunk_actions/thunk_actions.dart';
 import 'package:bot_web/redux/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import '../../actions/thunk_actions/thunk_actions.dart';
+import '../../redux/app_state.dart';
 
 class GetuserText extends StatelessWidget {
   final _textFieldController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, AppState>(
+    return new StoreConnector<AppState, AppState>(
       converter: (store) => store.state,
       builder: (context, state) => new Container(
         width: 400,
@@ -54,12 +57,26 @@ class GetuserText extends StatelessWidget {
                 icon: Icon(Icons.send_sharp),
                 color: Colors.white,
                 onPressed: () {
-                  StoreProvider.of<AppState>(context).dispatch(
-                    getData(),
+                  // aql.add(
+                  //   {
+                  //     'question': state.question,
+                  //   },
+                  // );
+                  answerquestionlist.add(
+                    state.question,
                   );
+                  StoreProvider.of<AppState>(context).dispatch(
+                    postMessage(),
+                  );
+                  _textFieldController.clear();
                 },
               ),
             ),
+            onChanged: (question) {
+              StoreProvider.of<AppState>(context).dispatch(
+                Question(question: question),
+              );
+            },
             minLines: 1,
           ),
         ),

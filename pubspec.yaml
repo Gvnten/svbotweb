@@ -36,12 +36,12 @@ dependencies:
   redux: ^5.0.0
   flutter_redux: ^0.8.2
   redux_thunk: ^0.4.0
-  adobe_xd: ^1.1.0+1
+  adobe_xd: ^2.0.0+1
   flutter_redux_navigation: ^0.7.0
   flutter_modular: ^3.1.0
-  popup_window: ^1.1.1
   popup_windows: ^0.0.1
   localstorage: ^4.0.0+1
+  flutter_rating_bar: ^4.0.0
 
 dev_dependencies:
   flutter_test:

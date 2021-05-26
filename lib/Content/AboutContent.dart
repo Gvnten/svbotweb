@@ -7,6 +7,7 @@ class AboutContent extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text("About content"),
         ],

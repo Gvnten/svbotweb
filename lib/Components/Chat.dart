@@ -9,7 +9,7 @@ class Chat extends StatelessWidget {
     return new Container(
       margin: EdgeInsets.only(right: 70),
       height: 500,
-      width: 500,
+      width: 400,
       alignment: Alignment.center,
       child: new Flex(
         direction: Axis.vertical,

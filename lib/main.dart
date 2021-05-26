@@ -4,7 +4,6 @@ import 'package:bot_web/Content/NavbarItemList.dart';
 import 'package:bot_web/Pages/GeneralPage.dart';
 import 'package:bot_web/Content/HomeContent.dart';
 import 'package:bot_web/middleware/sharedPreferences.dart';
-
 import 'package:bot_web/redux/app_state.dart';
 import 'package:bot_web/redux/reducers.dart';
 import 'package:bot_web/routes/router.dart';
@@ -13,18 +12,25 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
 import 'Pages/GeneralPage.dart';
+import 'actions/thunk_actions/thunk_actions.dart';
+import 'middleware/api.dart';
+import 'middleware/sharedPreferences.dart';
 
 void main() async {
-  final Store<AppState> _store = Store<AppState>(
+  SharedPref.removeTempToken();
+  Api().getToken();
+  final Store<AppState> _store = new Store<AppState>(
     appReducer,
     initialState: new AppState.initial(
       userName: await SharedPref.getValue() ?? null,
       page: new HomeContent(),
       popupWindow: await SharedPref.checkUser() == false
-          ? GetNamePopupwindow()
-          : ChatPopupwindow(),
+          ? new GetNamePopupwindow()
+          : new ChatPopupwindow(),
       onHoverValuesList: NavbarItemList.onHoverValuesList,
       changeFocusValues: NavbarItemList.onChangeFocusValues,
+      question: null,
+      answerquestionlist: answerquestionlist,
     ),
     middleware: [
       thunkMiddleware,
@@ -32,7 +38,7 @@ void main() async {
   );
 
   runApp(
-    MyApp(store: _store),
+    new MyApp(store: _store),
   );
 }
 
@@ -48,7 +54,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: true,
         title: 'Chat bot',
-        theme: ThemeData(
+        theme: new ThemeData(
           primarySwatch: Colors.blue,
         ),
         builder: (context, child) => new GeneralPage(

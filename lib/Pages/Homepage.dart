@@ -15,17 +15,16 @@ class HomePage extends StatelessWidget {
     return new StoreConnector<AppState, AppState>(
       converter: (store) => store.state,
       builder: (context, state) => SafeArea(
-        child: Scaffold(
-          appBar: PreferredSize(
+        child: new Scaffold(
+          appBar: new PreferredSize(
             preferredSize: Size(MediaQuery.of(context).size.width, 1000),
-            child: Container(
-              color: Colors.transparent,
-              child: Padding(
+            child: new Container(
+              child: new Padding(
                 padding: EdgeInsets.all(20),
-                child: Row(
+                child: new Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    InkWell(
+                    new InkWell(
                       autofocus: true,
                       focusColor: Color(0xff1278bd),
                       focusNode: NavbarItemList.homeFocus,

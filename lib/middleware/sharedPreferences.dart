@@ -12,9 +12,24 @@ class SharedPref {
     return userName;
   }
 
+  static setTempToken(String token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("tmptoken", token);
+  }
+
+  static getTempToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userName = prefs.getString("tmptoken");
+    return userName;
+  }
+
+  static removeTempToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('tpmtoken');
+  }
+
   static checkUser() async {
     if (await getValue() != null) {
-      //print(await getValue());
       return true;
     }
     return false;
