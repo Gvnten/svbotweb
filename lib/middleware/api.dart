@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'sharedPreferences.dart';
 
 class Api {
-  final String baseUrl = 'https://34.69.70.73/api/';
+  final String baseUrl = 'http://34.69.70.73/api/';
 
   getToken() async {
     var apiUrl = 'auth';
