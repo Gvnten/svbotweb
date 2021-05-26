@@ -4,10 +4,9 @@ import 'package:bot_web/Content/IntroContent.dart';
 import 'package:bot_web/Content/NavbarItemList.dart';
 import 'package:bot_web/actions/ChangeContentAction.dart';
 import 'package:bot_web/actions/ChangeHoverTextColor.dart';
+import 'package:bot_web/redux/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-
-import '../redux/app_state.dart';
 
 class HomePage extends StatelessWidget {
   @override

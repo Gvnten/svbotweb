@@ -1,7 +1,7 @@
+import 'package:bot_web/Pages/Homepage.dart';
 import 'package:bot_web/routes/route_names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../Pages/HomePage.dart';
 import 'route_names.dart';
 
 class RouteGenerator {
