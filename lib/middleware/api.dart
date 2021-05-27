@@ -16,6 +16,9 @@ class Api {
         'password': 'Tseegii123',
       }),
       headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers':
+            'DNT, X-Mx-ReqToken, Keep-Alive, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control,Content-Type,',
         'Content-type': 'application/json',
         'Accept': 'application/json',
       },

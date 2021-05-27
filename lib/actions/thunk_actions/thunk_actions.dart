@@ -79,6 +79,53 @@ ThunkAction<AppState> postMessage() {
   };
 }
 
+ThunkAction<AppState> postFeedback() {
+  return (Store<AppState> store) async {
+    try {
+      //String token = await SharedPref.getTempToken();
+      //var apiUrl = 'conversations/tseegii/messages';
+      //var createUrl = Api().baseUrl + apiUrl;
+      final response = await http.post(
+        Uri.parse('https://lawyer-bot.epizy.com/wp-json/lb_feedback/save'),
+        body: jsonEncode(
+          {
+            'question': null,
+            'answer': null,
+            'rating': null,
+          },
+        ),
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers':
+              'DNT, X-Mx-ReqToken, Keep-Alive, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control,Content-Type,',
+          'Content-type': 'application/json',
+          'Accept': 'application/json',
+          //'Authorization': 'Bearer $token',
+        },
+      );
+      final resbody = json.decode(response.body);
+      if (response.statusCode == 200) {
+        // aql.add(
+        //   {
+        //     'answer': resbody[0]['text'],
+        //   },
+        // );
+        // answerquestionlist.add(
+        //   resbody[0]['text'],
+        // );
+        // store.dispatch(
+        //   new ChatAction(
+        //     answerquestionlist: answerquestionlist,
+        //     //answerquestionlist: aql,
+        //   ),
+        // );
+      }
+    } catch (e) {
+      //store.dispatch(ErrorMsg(message: e.toString()));
+    }
+  };
+}
+
 // ThunkAction<AppState> getToken() {
 //   return (Store<AppState> store) async {
 //     store.dispatch(Loading());
