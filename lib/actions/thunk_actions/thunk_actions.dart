@@ -1,40 +1,12 @@
 import 'dart:convert';
-import 'package:bot_web/actions/ChatAction.dart';
+import 'package:bot_web/actions/AnswerListAction.dart';
 import 'package:bot_web/actions/ErrorMsg.dart';
 import 'package:bot_web/middleware/api.dart';
+import 'package:bot_web/middleware/sharedPreferences.dart';
 import 'package:bot_web/redux/app_state.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
 import 'package:http/http.dart' as http;
-import '../../middleware/api.dart';
-import '../../middleware/sharedPreferences.dart';
-import '../../redux/app_state.dart';
-
-final List<String> answerquestionlist = [];
-final List<Map<String, dynamic>> aql = [];
-
-ThunkAction<AppState> getConversation() {
-  return (Store<AppState> store) async {
-    try {
-      // final response = await http.get(
-      //   Uri.parse('https://api.chucknorris.io/jokes/random'),
-      // );
-      //final responseBody = json.decode(response.body);
-      // store.dispatch(
-      //   GetJoke(
-      //     joke: responseBody['value'],
-      //   ),
-      // );
-      //print(responseBody['value']);
-    } catch (e) {
-      store.dispatch(
-        ErrorMsg(
-          message: e.toString(),
-        ),
-      );
-    }
-  };
-}
 
 ThunkAction<AppState> postMessage() {
   return (Store<AppState> store) async {
@@ -58,68 +30,56 @@ ThunkAction<AppState> postMessage() {
       );
       final resbody = json.decode(response.body);
       if (response.statusCode == 200) {
-        // aql.add(
-        //   {
-        //     'answer': resbody[0]['text'],
-        //   },
-        // );
-        answerquestionlist.add(
+        store.state.answerList.add(
           resbody[0]['text'],
         );
+
         store.dispatch(
-          new ChatAction(
-            answerquestionlist: answerquestionlist,
-            //answerquestionlist: aql,
+          new AnswerListAction(
+            answerList: store.state.answerList,
           ),
         );
       }
+      print(
+        "Асуултын жагсаалтын урт: " +
+            store.state.questionList.length.toString(),
+      );
+      print("Асуултын жагсаалт: " + store.state.questionList.toString());
+      print(
+        "Хариултын жагсаалтын урт: " + store.state.answerList.length.toString(),
+      );
+      print("Хариултын жагсаалт: " + store.state.answerList.toString());
     } catch (e) {
       store.dispatch(ErrorMsg(message: e.toString()));
     }
   };
 }
 
-ThunkAction<AppState> postFeedback() {
+ThunkAction<AppState> postFeedback(int index) {
   return (Store<AppState> store) async {
     try {
       //String token = await SharedPref.getTempToken();
       //var apiUrl = 'conversations/tseegii/messages';
       //var createUrl = Api().baseUrl + apiUrl;
       final response = await http.post(
-        Uri.parse('https://lawyer-bot.epizy.com/wp-json/lb_feedback/save'),
+        Uri.parse('http://lawyer-bot.epizy.com/wp-json/lb_feedback/save'),
         body: jsonEncode(
           {
-            'question': null,
-            'answer': null,
-            'rating': null,
+            'question': store.state.questionList[index],
+            'answer': store.state.answerList[index],
+            'rating': store.state.ratingList[index],
           },
         ),
         headers: {
           'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers':
-              'DNT, X-Mx-ReqToken, Keep-Alive, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control,Content-Type,',
+          'Access-Control-Allow-Methods': 'POST',
+          //'Access-Control-Allow-Headers': '*',
           'Content-type': 'application/json',
           'Accept': 'application/json',
-          //'Authorization': 'Bearer $token',
         },
       );
-      final resbody = json.decode(response.body);
-      if (response.statusCode == 200) {
-        // aql.add(
-        //   {
-        //     'answer': resbody[0]['text'],
-        //   },
-        // );
-        // answerquestionlist.add(
-        //   resbody[0]['text'],
-        // );
-        // store.dispatch(
-        //   new ChatAction(
-        //     answerquestionlist: answerquestionlist,
-        //     //answerquestionlist: aql,
-        //   ),
-        // );
-      }
+      //final resbody = json.decode(response.body);
+      if (response.statusCode == 200) {}
     } catch (e) {
       //store.dispatch(ErrorMsg(message: e.toString()));
     }

@@ -9,10 +9,10 @@ class AppState {
   List<bool> changeFocusValues;
   ThunkAction<AppState> getToken;
   String token;
+  List<String> questionList;
+  List<String> answerList;
+  List<double> ratingList;
   String question;
-  //String answer;
-  List<String> answerquestionlist;
-  List<Map<String, dynamic>> aql;
 
   AppState({
     this.userName,
@@ -22,10 +22,10 @@ class AppState {
     this.changeFocusValues,
     this.getToken,
     this.token,
-    //this.answer,
+    this.questionList,
+    this.answerList,
+    this.ratingList,
     this.question,
-    this.answerquestionlist,
-    this.aql,
   });
 
   AppState.copyWith({
@@ -36,10 +36,10 @@ class AppState {
     List<bool> onHoverValuesList,
     List<bool> changeFocusValues,
     String token,
-    //String answer,
+    List<String> questionList,
+    List<String> answerList,
+    List<String> ratingList,
     String question,
-    List<String> answerquestionlist,
-    List<Map<String, dynamic>> aql,
   }) {
     this.userName = userName ?? prevState.userName;
     this.page = page ?? prevState.page;
@@ -47,11 +47,10 @@ class AppState {
     this.onHoverValuesList = onHoverValuesList ?? prevState.onHoverValuesList;
     this.changeFocusValues = changeFocusValues ?? prevState.changeFocusValues;
     this.token = token ?? prevState.token;
-    //this.answer = answer ?? prevState.answer;
+    this.questionList = questionList ?? prevState.questionList;
+    this.answerList = answerList ?? prevState.answerList;
+    this.ratingList = ratingList ?? prevState.ratingList;
     this.question = question ?? prevState.question;
-    this.answerquestionlist =
-        answerquestionlist ?? prevState.answerquestionlist;
-    this.aql = aql ?? prevState.aql;
   }
 
   AppState.initial({
@@ -62,10 +61,10 @@ class AppState {
     List<bool> changeFocusValues,
     ThunkAction<AppState> getToken,
     String token,
-    //String answer,
+    List<String> questionList,
+    List<String> answerList,
+    List<double> ratingList,
     String question,
-    List<String> answerquestionlist,
-    List<Map<String, dynamic>> aql,
   }) {
     this.userName = userName;
     this.page = page;
@@ -74,9 +73,9 @@ class AppState {
     this.changeFocusValues = changeFocusValues;
     this.getToken = getToken;
     this.token = token;
-    //this.answer = answer;
+    this.answerList = answerList;
+    this.questionList = questionList;
+    this.ratingList = ratingList;
     this.question = question;
-    this.answerquestionlist = answerquestionlist;
-    this.aql = aql;
   }
 }

@@ -12,7 +12,6 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
 import 'Pages/GeneralPage.dart';
-import 'actions/thunk_actions/thunk_actions.dart';
 import 'middleware/api.dart';
 import 'middleware/sharedPreferences.dart';
 
@@ -30,7 +29,9 @@ void main() async {
       onHoverValuesList: NavbarItemList.onHoverValuesList,
       changeFocusValues: NavbarItemList.onChangeFocusValues,
       question: null,
-      answerquestionlist: answerquestionlist,
+      answerList: [],
+      questionList: [],
+      ratingList: [],
     ),
     middleware: [
       thunkMiddleware,

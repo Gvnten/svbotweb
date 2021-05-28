@@ -13,14 +13,14 @@ class GetNamePopupwindow extends StatelessWidget {
         child: new PopupWindowWidget(
           intelligentConversion: true,
           child: Container(
-            color: Color(0xff1278bd),
             padding: EdgeInsets.all(15.0),
-            child: Text(
-              'Чат',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14.0,
-              ),
+            decoration: new BoxDecoration(
+              color: Color(0xff1278bd),
+              shape: BoxShape.circle,
+            ),
+            child: new Icon(
+              Icons.edit_sharp,
+              color: Colors.white,
             ),
           ),
           showChild: new GetUserName(),

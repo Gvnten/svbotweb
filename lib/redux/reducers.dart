@@ -1,7 +1,9 @@
+import 'package:bot_web/actions/AnswerListAction.dart';
 import 'package:bot_web/actions/ChangeHoverTextColor.dart';
 import 'package:bot_web/actions/ChangePopupWindow.dart';
-import 'package:bot_web/actions/ChatAction.dart';
+import 'package:bot_web/actions/QuestionListAction.dart';
 import 'package:bot_web/actions/Question.dart';
+import 'package:bot_web/actions/RatingListAction.dart';
 import 'package:bot_web/redux/app_state.dart';
 import '../actions/ChangeContentAction.dart';
 import '../actions/SetToken.dart';
@@ -39,23 +41,22 @@ AppState appReducer(AppState prevState, dynamic action) {
       prevState: prevState,
       token: action.token,
     );
-  } else if (action is ChatAction) {
+  } else if (action is QuestionListAction) {
     return new AppState.copyWith(
       prevState: prevState,
-      answerquestionlist: action.answerquestionlist,
+      questionList: action.questionList,
     );
-  }
-  {
+  } else if (action is AnswerListAction) {
+    return new AppState.copyWith(
+      prevState: prevState,
+      answerList: action.answerList,
+    );
+  } else if (action is RatingListAction) {
+    return new AppState.copyWith(
+      prevState: prevState,
+      ratingList: action.ratingList,
+    );
+  } else {
     return prevState;
   }
 }
-
-/*
-else if (action is AnswerQuestion) {
-    return new AppState.copyWith(
-      prevState: prevState,
-      answer: action.answer,
-      question: action.question,
-    );
-  }
-*/

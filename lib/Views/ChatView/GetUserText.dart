@@ -3,8 +3,6 @@ import 'package:bot_web/actions/thunk_actions/thunk_actions.dart';
 import 'package:bot_web/redux/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import '../../actions/thunk_actions/thunk_actions.dart';
-import '../../redux/app_state.dart';
 
 class GetuserText extends StatelessWidget {
   final _textFieldController = new TextEditingController();
@@ -57,14 +55,7 @@ class GetuserText extends StatelessWidget {
                 icon: Icon(Icons.send_sharp),
                 color: Colors.white,
                 onPressed: () {
-                  // aql.add(
-                  //   {
-                  //     'question': state.question,
-                  //   },
-                  // );
-                  answerquestionlist.add(
-                    state.question,
-                  );
+                  state.questionList.add(_textFieldController.text);
                   StoreProvider.of<AppState>(context).dispatch(
                     postMessage(),
                   );
