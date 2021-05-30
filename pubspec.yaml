@@ -43,6 +43,8 @@ dependencies:
   localstorage: ^4.0.0+1
   flutter_rating_bar: ^4.0.0
   loading_indicator: ^2.1.1
+  json_table: ^2.0.1
+  scrollable_positioned_list: ^0.1.10
 
 dev_dependencies:
   flutter_test:

@@ -17,7 +17,7 @@ import 'middleware/sharedPreferences.dart';
 
 void main() async {
   SharedPref.removeTempToken();
-  Api().getToken();
+  await new Api().getToken();
   final Store<AppState> _store = new Store<AppState>(
     appReducer,
     initialState: new AppState.initial(
@@ -32,6 +32,9 @@ void main() async {
       answerList: [],
       questionList: [],
       ratingList: [],
+      //getFeedbackList: getFeedbacklist(),
+      feedbackList: await new Api().getFeedbacklist(),
+      isRated: true,
     ),
     middleware: [
       thunkMiddleware,

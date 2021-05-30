@@ -1,6 +1,6 @@
 import 'package:bot_web/Components/ChatPopupWindow.dart';
-import 'package:bot_web/actions/ChangePopupWindow.dart';
-import 'package:bot_web/actions/saveName.dart';
+import 'package:bot_web/actions/Other/ChangePopupWindow.dart';
+import 'package:bot_web/actions/Other/saveName.dart';
 import 'package:bot_web/middleware/sharedPreferences.dart';
 import 'package:bot_web/redux/app_state.dart';
 import 'package:flutter/material.dart';

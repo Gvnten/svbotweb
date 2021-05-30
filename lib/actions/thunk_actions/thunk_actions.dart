@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'package:bot_web/actions/AnswerListAction.dart';
-import 'package:bot_web/actions/ErrorMsg.dart';
+import 'package:bot_web/actions/Other/AnswerListAction.dart';
+import 'package:bot_web/actions/Other/ErrorMsg.dart';
+import 'package:bot_web/actions/Other/UpdateFeedbackListaction.dart';
 import 'package:bot_web/middleware/api.dart';
 import 'package:bot_web/middleware/sharedPreferences.dart';
 import 'package:bot_web/redux/app_state.dart';
@@ -12,7 +13,7 @@ ThunkAction<AppState> postMessage() {
   return (Store<AppState> store) async {
     try {
       String token = await SharedPref.getTempToken();
-      var apiUrl = 'conversations/tseegii/messages';
+      var apiUrl = 'conversations/$store.state.userName/messages';
       var createUrl = Api().baseUrl + apiUrl;
       final response = await http.post(
         Uri.parse(createUrl),
@@ -33,22 +34,13 @@ ThunkAction<AppState> postMessage() {
         store.state.answerList.add(
           resbody[0]['text'],
         );
-
+        store.state.ratingList.add(null);
         store.dispatch(
           new AnswerListAction(
             answerList: store.state.answerList,
           ),
         );
       }
-      print(
-        "Асуултын жагсаалтын урт: " +
-            store.state.questionList.length.toString(),
-      );
-      print("Асуултын жагсаалт: " + store.state.questionList.toString());
-      print(
-        "Хариултын жагсаалтын урт: " + store.state.answerList.length.toString(),
-      );
-      print("Хариултын жагсаалт: " + store.state.answerList.toString());
     } catch (e) {
       store.dispatch(ErrorMsg(message: e.toString()));
     }
@@ -58,58 +50,40 @@ ThunkAction<AppState> postMessage() {
 ThunkAction<AppState> postFeedback(int index) {
   return (Store<AppState> store) async {
     try {
-      //String token = await SharedPref.getTempToken();
-      //var apiUrl = 'conversations/tseegii/messages';
-      //var createUrl = Api().baseUrl + apiUrl;
-      final response = await http.post(
-        Uri.parse('http://lawyer-bot.epizy.com/wp-json/lb_feedback/save'),
-        body: jsonEncode(
-          {
-            'question': store.state.questionList[index],
-            'answer': store.state.answerList[index],
-            'rating': store.state.ratingList[index],
-          },
-        ),
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'POST',
-          //'Access-Control-Allow-Headers': '*',
-          'Content-type': 'application/json',
-          'Accept': 'application/json',
-        },
-      );
-      //final resbody = json.decode(response.body);
-      if (response.statusCode == 200) {}
+      await http.post(Uri.parse('http://35.229.235.9/wp-json/lb_feedback/save'),
+          body: jsonEncode(
+            {
+              "question": store.state.questionList[index],
+              "answer": store.state.answerList[index],
+              "rating": store.state.ratingList[index],
+            },
+          ),
+          headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+          });
     } catch (e) {
-      //store.dispatch(ErrorMsg(message: e.toString()));
+      store.dispatch(
+        ErrorMsg(
+          message: e.toString(),
+        ),
+      );
     }
   };
 }
 
-// ThunkAction<AppState> getToken() {
+// ThunkAction<AppState> updateFeedbacklist() {
 //   return (Store<AppState> store) async {
-//     store.dispatch(Loading());
 //     try {
-//       var apiUrl = 'auth';
-//       var createUrl = new Api().baseUrl + apiUrl;
-//       final response = await http.post(
-//         Uri.parse(createUrl),
-//         body: jsonEncode(
-//           {
-//             'username': 'me',
-//             'password': 'Tseegii123',
-//           },
-//         ),
-//         headers: {
-//           'Content-type': 'application/json',
-//           'Accept': 'application/json',
-//         },
+//       final response = await http.get(
+//         Uri.parse('http://35.229.235.9/wp-json/lb_feedback/get'),
 //       );
-//       final resbody = json.decode(response.body);
-//       String token = resbody['access_token'];
+
+//       final data = json.decode(response.body);
+
 //       store.dispatch(
-//         new SetToken(
-//           token: token,
+//         new UpdateFeedbackListaction(
+//           updateFeedbackList: data,
 //         ),
 //       );
 //     } catch (e) {

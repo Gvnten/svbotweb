@@ -1,4 +1,4 @@
-import 'package:bot_web/actions/Question.dart';
+import 'package:bot_web/actions/Other/Question.dart';
 import 'package:bot_web/actions/thunk_actions/thunk_actions.dart';
 import 'package:bot_web/redux/app_state.dart';
 import 'package:flutter/material.dart';

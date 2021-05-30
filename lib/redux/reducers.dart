@@ -1,13 +1,15 @@
-import 'package:bot_web/actions/AnswerListAction.dart';
-import 'package:bot_web/actions/ChangeHoverTextColor.dart';
-import 'package:bot_web/actions/ChangePopupWindow.dart';
-import 'package:bot_web/actions/QuestionListAction.dart';
-import 'package:bot_web/actions/Question.dart';
-import 'package:bot_web/actions/RatingListAction.dart';
+import 'package:bot_web/actions/Other/AnswerListAction.dart';
+import 'package:bot_web/actions/Other/updateFeedbackListaction.dart';
+import 'package:bot_web/actions/TopbarActions/ChangeHoverTextColor.dart';
+import 'package:bot_web/actions/Other/ChangePopupWindow.dart';
+import 'package:bot_web/actions/Other/QuestionListAction.dart';
+import 'package:bot_web/actions/Other/Question.dart';
+import 'package:bot_web/actions/Other/RatingListAction.dart';
+import 'package:bot_web/actions/Other/GetFeedbackListaction.dart';
 import 'package:bot_web/redux/app_state.dart';
-import '../actions/ChangeContentAction.dart';
-import '../actions/SetToken.dart';
-import '../actions/saveName.dart';
+import '../actions/Other/ChangeContentAction.dart';
+import '../actions/Other/SetToken.dart';
+import '../actions/Other/saveName.dart';
 import 'app_state.dart';
 
 AppState appReducer(AppState prevState, dynamic action) {
@@ -55,6 +57,11 @@ AppState appReducer(AppState prevState, dynamic action) {
     return new AppState.copyWith(
       prevState: prevState,
       ratingList: action.ratingList,
+    );
+  } else if (action is GetFeedbackListaction) {
+    return new AppState.copyWith(
+      prevState: prevState,
+      feedbackList: action.feedbackList,
     );
   } else {
     return prevState;
