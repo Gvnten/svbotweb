@@ -6,8 +6,8 @@ class IntroContent extends StatelessWidget {
     return new Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+      child: Wrap(
+        alignment: WrapAlignment.center,
         children: [
           Divider(),
           Text("Intro content"),

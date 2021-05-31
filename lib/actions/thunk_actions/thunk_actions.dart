@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:bot_web/actions/Other/AnswerListAction.dart';
 import 'package:bot_web/actions/Other/ErrorMsg.dart';
-import 'package:bot_web/actions/Other/UpdateFeedbackListaction.dart';
 import 'package:bot_web/middleware/api.dart';
 import 'package:bot_web/middleware/sharedPreferences.dart';
 import 'package:bot_web/redux/app_state.dart';
@@ -13,7 +12,7 @@ ThunkAction<AppState> postMessage() {
   return (Store<AppState> store) async {
     try {
       String token = await SharedPref.getTempToken();
-      var apiUrl = 'conversations/$store.state.userName/messages';
+      var apiUrl = 'conversations/${store.state.userName}/messages';
       var createUrl = Api().baseUrl + apiUrl;
       final response = await http.post(
         Uri.parse(createUrl),

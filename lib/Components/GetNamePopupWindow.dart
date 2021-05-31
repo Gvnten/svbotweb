@@ -15,7 +15,7 @@ class GetNamePopupwindow extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(15.0),
             decoration: new BoxDecoration(
-              color: Color(0xff1278bd),
+              color: Color(0xFF07395F),
               shape: BoxShape.circle,
             ),
             child: new Icon(

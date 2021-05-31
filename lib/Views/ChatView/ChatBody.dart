@@ -1,4 +1,3 @@
-import 'package:bot_web/actions/Other/UpdateFeedbackListaction.dart';
 import 'package:bot_web/actions/thunk_actions/thunk_actions.dart';
 import 'package:bot_web/redux/app_state.dart';
 import 'package:flutter/material.dart';
@@ -59,22 +58,21 @@ class ChatBody extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.center,
                       child: Visibility(
-                        visible: state.ratingList[index] == null ? true : false,
+                        visible: state.isRated == true &&
+                                state.ratingList[index] == null
+                            ? true
+                            : false,
                         child: RatingBar.builder(
                           onRatingUpdate: (rate) {
-                            print('Printing index: ' + index.toString());
                             state.ratingList[index] = rate;
                             StoreProvider.of<AppState>(context).dispatch(
                               postFeedback(index),
-                            );
-                            StoreProvider.of<AppState>(context).dispatch(
-                              null,
                             );
                           },
                           direction: Axis.horizontal,
                           itemBuilder: (context, index) => Icon(
                             Icons.star,
-                            color: Color(0xff1278bd),
+                            color: Colors.amber,
                           ),
                           itemCount: 5,
                           itemSize: 30.0,

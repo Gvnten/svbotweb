@@ -45,6 +45,7 @@ dependencies:
   loading_indicator: ^2.1.1
   json_table: ^2.0.1
   scrollable_positioned_list: ^0.1.10
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -62,8 +63,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -34,6 +34,7 @@ class Api {
       Uri.parse('http://35.229.235.9/wp-json/lb_feedback/get'),
     );
     final data = json.decode(response.body);
+    print(data);
     return data;
   }
 }
