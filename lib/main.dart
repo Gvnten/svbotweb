@@ -32,7 +32,7 @@ void main() async {
       answerList: [],
       questionList: [],
       ratingList: [],
-      //getFeedbackList: getFeedbacklist(),
+      newsList: await new Api().getNewsList(),
       feedbackList: await new Api().getFeedbacklist(),
       isRated: true,
     ),

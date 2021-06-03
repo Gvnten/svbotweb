@@ -33,8 +33,17 @@ class Api {
     final response = await http.get(
       Uri.parse('http://35.229.235.9/wp-json/lb_feedback/get'),
     );
-    final data = json.decode(response.body);
-    print(data);
-    return data;
+
+    final feedbackList = json.decode(response.body);
+    return feedbackList;
+  }
+
+  getNewsList() async {
+    final response = await http.get(
+      Uri.parse('http://35.229.235.9/wp-json/wp/v2/posts'),
+    );
+
+    final newsList = json.decode(response.body);
+    return newsList;
   }
 }

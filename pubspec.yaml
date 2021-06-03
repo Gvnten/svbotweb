@@ -36,7 +36,7 @@ dependencies:
   redux: ^5.0.0
   flutter_redux: ^0.8.2
   redux_thunk: ^0.4.0
-  adobe_xd: ^2.0.0+1
+
   flutter_redux_navigation: ^0.7.0
   flutter_modular: ^3.1.0
   popup_windows: ^0.0.1
@@ -46,7 +46,10 @@ dependencies:
   json_table: ^2.0.1
   scrollable_positioned_list: ^0.1.10
   shimmer: ^2.0.0
-
+  responsive_table: ^0.1.1+8
+  carousel_slider: ^3.0.0
+  flutter_html: ^2.0.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

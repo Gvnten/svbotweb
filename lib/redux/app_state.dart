@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:redux_thunk/redux_thunk.dart';
 
 class AppState {
   String userName;
@@ -7,7 +6,6 @@ class AppState {
   Widget popupWindow;
   List<bool> onHoverValuesList;
   List<bool> changeFocusValues;
-  ThunkAction<AppState> getFeedbackList;
   String token;
   List<String> questionList;
   List<String> answerList;
@@ -15,6 +13,7 @@ class AppState {
   List<dynamic> feedbackList;
   String question;
   bool isRated;
+  List<dynamic> newsList;
 
   AppState({
     this.userName,
@@ -22,7 +21,7 @@ class AppState {
     this.popupWindow,
     this.onHoverValuesList,
     this.changeFocusValues,
-    this.getFeedbackList,
+    this.newsList,
     this.token,
     this.questionList,
     this.answerList,
@@ -46,7 +45,7 @@ class AppState {
     List<dynamic> feedbackList,
     String question,
     bool isRated,
-    ThunkAction<AppState> getFeedbackList,
+    List<dynamic> newsList,
   }) {
     this.userName = userName ?? prevState.userName;
     this.page = page ?? prevState.page;
@@ -60,7 +59,7 @@ class AppState {
     this.feedbackList = feedbackList ?? prevState.feedbackList;
     this.question = question ?? prevState.question;
     this.isRated = isRated ?? prevState.isRated;
-    this.getFeedbackList = getFeedbackList ?? prevState.getFeedbackList;
+    this.newsList = newsList ?? prevState.newsList;
   }
 
   AppState.initial({
@@ -69,7 +68,7 @@ class AppState {
     Widget popupWindow,
     List<bool> onHoverValuesList,
     List<bool> changeFocusValues,
-    ThunkAction<AppState> getFeedbackList,
+    List<dynamic> newsList,
     String token,
     List<String> questionList,
     List<String> answerList,
@@ -83,7 +82,7 @@ class AppState {
     this.popupWindow = popupWindow;
     this.onHoverValuesList = onHoverValuesList;
     this.changeFocusValues = changeFocusValues;
-    this.getFeedbackList = getFeedbackList;
+    this.newsList = newsList;
     this.token = token;
     this.answerList = answerList;
     this.questionList = questionList;
