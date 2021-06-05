@@ -12,78 +12,87 @@ class ChatBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, AppState>(
       converter: (store) => store.state,
-      builder: (context, state) => new Container(
-        alignment: Alignment.bottomCenter,
-        width: 400,
-        height: 400,
-        color: Colors.white,
-        child: new ListView.builder(
-          padding: const EdgeInsets.all(15),
-          shrinkWrap: true,
-          itemCount: state.questionList.length,
-          itemBuilder: (context, index) {
-            return new Padding(
-              padding: const EdgeInsets.only(top: 11),
-              child: new Column(
-                children: [
-                  new ChatBubble(
-                    backGroundColor: Color(0xff1278bd),
-                    margin: const EdgeInsets.only(left: 70),
-                    alignment: Alignment.centerRight,
-                    clipper: new ChatBubbleClipper5(
-                      type: BubbleType.sendBubble,
-                    ),
-                    child: new Text(
-                      "${state.questionList[index]}",
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 11),
-                    child: new ChatBubble(
-                      margin: const EdgeInsets.only(right: 70),
-                      backGroundColor: Colors.white70,
+      builder: (context, state) => Container(
+        color: Colors.grey[50],
+        child: new Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.grey.withOpacity(0.5),
+            ),
+          ),
+          alignment: Alignment.bottomCenter,
+          width: 400,
+          height: 400,
+          //color: Colors.white70,
+          child: new ListView.builder(
+            padding: const EdgeInsets.all(15),
+            shrinkWrap: true,
+            itemCount: state.questionList.length,
+            itemBuilder: (context, index) {
+              return new Padding(
+                padding: const EdgeInsets.only(top: 11),
+                child: new Column(
+                  children: [
+                    new ChatBubble(
+                      backGroundColor: Color(0xff1278bd),
+                      margin: const EdgeInsets.only(left: 70),
+                      alignment: Alignment.centerRight,
                       clipper: new ChatBubbleClipper5(
-                        type: BubbleType.receiverBubble,
+                        type: BubbleType.sendBubble,
                       ),
-                      child: Text(
-                        "${state.answerList[index]}",
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Visibility(
-                        visible: state.isRated == true &&
-                                state.ratingList[index] == null
-                            ? true
-                            : false,
-                        child: RatingBar.builder(
-                          onRatingUpdate: (rate) {
-                            state.ratingList[index] = rate;
-                            StoreProvider.of<AppState>(context).dispatch(
-                              postFeedback(index),
-                            );
-                          },
-                          direction: Axis.horizontal,
-                          itemBuilder: (context, index) => Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          itemCount: 5,
-                          itemSize: 30.0,
+                      child: new Text(
+                        "${state.questionList[index]}",
+                        style: TextStyle(
+                          color: Colors.white,
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            );
-          },
+                    Padding(
+                      padding: const EdgeInsets.only(top: 11),
+                      child: new ChatBubble(
+                        margin: const EdgeInsets.only(right: 70),
+                        backGroundColor: Colors.grey,
+                        clipper: new ChatBubbleClipper5(
+                          type: BubbleType.receiverBubble,
+                        ),
+                        child: Text(
+                          "${state.answerList[index]}",
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Visibility(
+                          visible: state.isRated == true &&
+                                  state.ratingList[index] == null
+                              ? true
+                              : false,
+                          child: RatingBar.builder(
+                            onRatingUpdate: (rate) {
+                              state.ratingList[index] = rate;
+                              StoreProvider.of<AppState>(context).dispatch(
+                                postFeedback(index),
+                              );
+                            },
+                            glowColor: Colors.amber,
+                            direction: Axis.horizontal,
+                            itemBuilder: (context, index) => Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            itemCount: 5,
+                            itemSize: 30.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       ),
     );

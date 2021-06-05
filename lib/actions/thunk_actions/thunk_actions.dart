@@ -49,15 +49,16 @@ ThunkAction<AppState> postMessage() {
 ThunkAction<AppState> postFeedback(int index) {
   return (Store<AppState> store) async {
     try {
-      await http.post(Uri.parse('http://35.229.235.9/wp-json/lb_feedback/save'),
-          body: jsonEncode(
-            {
-              "question": store.state.questionList[index],
-              "answer": store.state.answerList[index],
-              "rating": store.state.ratingList[index],
-            },
-          ),
-          headers: {
+      await http
+          .post(Uri.parse('https://www.lawyerbot.xyz/wp-json/lb_feedback/save'),
+              body: jsonEncode(
+                {
+                  "question": store.state.questionList[index],
+                  "answer": store.state.answerList[index],
+                  "rating": store.state.ratingList[index],
+                },
+              ),
+              headers: {
             'Content-type': 'application/json',
             'Accept': 'application/json',
           });

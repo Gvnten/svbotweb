@@ -464,7 +464,7 @@ class HomeContent extends StatelessWidget {
                               width: 7,
                             ),
                             Text(
-                              'Одоогоор үнэлгээ хийгдсэн асуулт байхгүй байна.',
+                              'Одоогоор үнэлгээ байхгүй байна.',
                               style: TextStyle(
                                   //color: Colors.amber,
                                   ),
