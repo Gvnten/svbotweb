@@ -1,4 +1,3 @@
-import 'package:bot_web/Drawer/FooterClipper.dart';
 import 'package:bot_web/redux/app_state.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,53 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomeContent extends StatelessWidget {
+  final List<dynamic> testList = [
+    {
+      "name": "Mada",
+      "id": "7",
+      "gameName": "Soul",
+    },
+    {
+      "name": "Tsee9ii",
+      "id": "6",
+      "gameName": "Virus",
+    },
+    {
+      "name": "Dorjee",
+      "id": "66",
+      "gameName": "Ddorj",
+    },
+    {
+      "name": "Sony",
+      "id": "0310",
+      "gameName": "Soniikaa",
+    },
+    {
+      "name": "Tsagaanaa",
+      "id": "9",
+      "gameName": "Habiasa",
+    },
+    {
+      "name": "Ider",
+      "id": "555",
+      "gameName": "Candy",
+    },
+    {
+      "name": "Temka",
+      "id": "45",
+      "gameName": "KMT",
+    },
+    {
+      "name": "Usku",
+      "id": "405",
+      "gameName": "Usku405",
+    },
+    {
+      "name": "Uujig",
+      "id": "78",
+      "gameName": "Uujiguug",
+    }
+  ];
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, AppState>(
@@ -227,39 +273,92 @@ class HomeContent extends StatelessWidget {
                   ),
                 ),
               ),
-              CarouselSlider.builder(
-                itemCount: state.newsList.length,
-                itemBuilder: (context, index, realIdx) {
-                  return Container(
-                    alignment: Alignment.center,
-                    width: 400,
-                    child: Expanded(
-                      flex: 3,
-                      child: Column(
+              state.newsList.length == 0
+                  ? Container(
+                      color: Colors.blue,
+                      child: new CarouselSlider.builder(
+                        itemCount: (state.newsList.length / 3).round(),
+                        itemBuilder: (context, index, realIndex) {
+                          final int first = index * 3;
+                          final int second = first + 1;
+                          final int third = second + 1;
+                          return Row(
+                            children: [first, second, third].map((idx) {
+                              return Expanded(
+                                flex: 1,
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  color: Colors.amber,
+                                  width: 400,
+                                  height: 400,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      // Image(
+                                      //   height: 200,
+                                      //   width: 400,
+                                      //   image: NetworkImage(
+                                      //     testList[index]['cover'] ?? '',
+                                      //   ),
+                                      // ),
+                                      Container(
+                                        child: Align(
+                                          child: Html(
+                                            data: state.newsList[idx]['title'],
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        alignment: Alignment.center,
+                                        child: Html(
+                                          data: state.newsList[idx]['id'],
+                                        ),
+                                      ),
+                                      Container(
+                                        alignment: Alignment.center,
+                                        child: Html(
+                                          data: state.newsList[idx]['gameName'],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          );
+                        },
+                        options: CarouselOptions(
+                          enlargeCenterPage: true,
+                          height: 400.0,
+                        ),
+                      ),
+                    )
+                  : new Container(
+                      width: MediaQuery.of(context).size.width - 100,
+                      height: 200,
+                      margin: const EdgeInsets.only(top: 25, bottom: 15),
+                      alignment: Alignment.center,
+                      color: Colors.white,
+                      child: new Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image(
-                            height: 200,
-                            width: 400,
-                            image: NetworkImage(
-                              state.newsList[index]['cover'],
-                            ),
+                          new Icon(
+                            Icons.warning,
+                            color: Colors.grey,
                           ),
-                          Html(
-                            data: state.newsList[index]['title'],
+                          new SizedBox(
+                            width: 7,
                           ),
-                          Html(
-                            data: state.newsList[index]['excerpt'],
+                          new Text(
+                            'Одоогоор мэдээ байхгүй байна.',
+                            style: TextStyle(
+                                //color: Colors.amber,
+                                ),
                           ),
                         ],
                       ),
                     ),
-                  );
-                },
-                options: CarouselOptions(
-                  height: 400.0,
-                ),
-              ),
-              Container(
+              new Container(
                 margin: const EdgeInsets.only(
                   top: 30,
                   bottom: 15,
@@ -279,7 +378,7 @@ class HomeContent extends StatelessWidget {
               new Container(
                 color: Colors.white,
                 width: MediaQuery.of(context).size.width - 100,
-                child: state.feedbackList != null
+                child: state.feedbackList.length != 0
                     ? new DataTable(
                         horizontalMargin: 20.0,
                         columnSpacing: 7.0,
@@ -349,6 +448,7 @@ class HomeContent extends StatelessWidget {
                             .toList(),
                       )
                     : Container(
+                        width: MediaQuery.of(context).size.width - 100,
                         margin: const EdgeInsets.only(top: 25, bottom: 15),
                         alignment: Alignment.center,
                         height: 200,
@@ -366,8 +466,8 @@ class HomeContent extends StatelessWidget {
                             Text(
                               'Одоогоор үнэлгээ хийгдсэн асуулт байхгүй байна.',
                               style: TextStyle(
-                                color: Colors.amber,
-                              ),
+                                  //color: Colors.amber,
+                                  ),
                             ),
                           ],
                         ),
@@ -388,7 +488,7 @@ class HomeContent extends StatelessWidget {
                       spacing: 21,
                       children: [
                         Card(
-                          color: Color(0xFF0D3D69),
+                          color: Color(0xff003566),
                           elevation: 0,
                           child: Container(
                             width: 400,
@@ -415,7 +515,7 @@ class HomeContent extends StatelessWidget {
                           ),
                         ),
                         Card(
-                          color: Color(0xFF0D3D69),
+                          color: Color(0xff003566),
                           elevation: 0,
                           child: Container(
                             width: 400,
@@ -460,7 +560,7 @@ class HomeContent extends StatelessWidget {
                           ),
                         ),
                         Card(
-                          color: Color(0xFF0D3D69),
+                          color: Color(0xff003566),
                           elevation: 0,
                           child: Container(
                             width: 400,
@@ -504,11 +604,16 @@ class HomeContent extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Shimmer.fromColors(
-                          baseColor: Colors.white,
-                          highlightColor: Colors.pink,
-                          child: Text(
-                            'Copyright © 2021 Доктор (PhD) Д.Золзаяа удирдагчтай О.Цэрэндорж, Н.Амаргүн',
+                        Container(
+                          margin: const EdgeInsets.only(
+                            bottom: 15,
+                          ),
+                          child: Shimmer.fromColors(
+                            baseColor: Colors.white,
+                            highlightColor: Colors.pink,
+                            child: Text(
+                              'Copyright © 2021 Доктор (PhD) Д.Золзаяа удирдагчтай О.Цэрэндорж, Н.Амаргүн',
+                            ),
                           ),
                         ),
                       ],

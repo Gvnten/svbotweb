@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'sharedPreferences.dart';
 
 class Api {
-  final String baseUrl = 'http://34.69.70.73/api/';
+  final String baseUrl = 'https://lawyerback.xyz/api/';
 
   getToken() async {
     var apiUrl = 'auth';
@@ -31,7 +31,7 @@ class Api {
 
   getFeedbacklist() async {
     final response = await http.get(
-      Uri.parse('http://35.229.235.9/wp-json/lb_feedback/get'),
+      Uri.parse('https://www.lawyerbot.xyz/wp-json/lb_feedback/get'),
     );
 
     final feedbackList = json.decode(response.body);
@@ -40,7 +40,7 @@ class Api {
 
   getNewsList() async {
     final response = await http.get(
-      Uri.parse('http://35.229.235.9/wp-json/wp/v2/posts'),
+      Uri.parse('https://www.lawyerbot.xyz/wp-json/wp/v2/posts'),
     );
 
     final newsList = json.decode(response.body);
